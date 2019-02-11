@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 from setuptools.command.install import install
-from version import __version__
+from flaterra.version import __version__
 import sys
 import os
 

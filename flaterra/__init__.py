@@ -1,6 +1,7 @@
 import re
 import argparse
 import logging
+import sys
 
 # Save what files were already imported
 imported_files = {}
@@ -31,7 +32,7 @@ def flat_file(path, file, main=False):
         # ex: import "./contract.sol";
         # ex: import {Contract, Contract2} from "./contracts.sol";
         import_match = re.findall(
-            r"^\s*import\s+|(?!{.*}\s*from\s*)\"(.*)\"\s*;\s*$", l
+            r"^\s*import\s+|(?!{.*}\s*from\s*)[\"|\'](.*)[\"|\']\s*;\s*$", l
         )
         if len(import_match) == 2:
             imported_file = import_match[1]
@@ -40,7 +41,7 @@ def flat_file(path, file, main=False):
                 imported_files.get(imported_file) is None
             ):
                 imported_files[imported_file] = True
-                logging.info("Importing file {file}".format(file=imported_file))
+                logging.debug("Importing file {file}".format(file=imported_file))
                 flat_source += flat_file(path=path, file=imported_file)
                 flat_source += "\n"
             else:
@@ -56,18 +57,24 @@ def flat_file(path, file, main=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="")
+    class CliParser(argparse.ArgumentParser):
+        def error(self, message):
+            sys.stderr.write('Error: {}\n'.format(message))
+            self.print_help()
+            sys.exit(2)
+
+    parser = CliParser()
     parser.add_argument(
-        "--contractsdir", help="Source directory of contracts", default="./contracts/"
+        "--folder", help="Folder with contracts", default="./"
     )
-    parser.add_argument("--mainsol", help="Main source Solidity file")
-    parser.add_argument("--outputsol", help="Output flattened Solidity file.")
+    parser.add_argument("--contract", help="Main source Solidity file")
+    parser.add_argument("--output", help="Output flattened Solidity file. Otherwise it appends `_flat.sol` to the contract filename.")
     parser.add_argument("--verbose", "-v", action="count", default=0, help="Show details")
     args = parser.parse_args()
 
-    contracts_dir = args.contractsdir
-    main_sol = args.mainsol
-    output_sol = args.outputsol
+    contracts_dir = args.folder
+    main_sol = args.contract
+    output_sol = args.output
     verbose = args.verbose
 
     # Set verbosity
