@@ -1,4 +1,4 @@
-# Flat Earth
+# Flaterra
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CircleCI](https://circleci.com/gh/cleanunicorn/flaterra/tree/master.svg?style=shield)](https://circleci.com/gh/cleanunicorn/flaterra)
