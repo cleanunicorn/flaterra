@@ -9,7 +9,7 @@
 
 Inspired by "earth" in Portuguese, terra and the flatness of the Earth.
 
-Flaterra parses the provided Solidity source file and adds any other `imported` files. This is useful if you want to upload your source code to a block explorer for verification or to run analysis on it, for example with [MythX](https://mythx.io/) or [Mythril](https://github.com/ConsenSys/mythril-classic/).
+Flaterra parses the provided Solidity source file and adds any other `imported` files. This is useful if you want to upload your source code to a block explorer for verification, use it with [Remix](https://remix.ethereum.org) or to run analysis on it, for example with [MythX](https://mythx.io/) or [Mythril](https://github.com/ConsenSys/mythril-classic/).
 
 A way to make Solidity source code flat like the earth.
 
