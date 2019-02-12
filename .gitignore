@@ -118,3 +118,6 @@ dmypy.json
 .vscode/*
 
 contracts/
+
+# Sonarqube
+.scannerwork/
