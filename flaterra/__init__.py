@@ -42,7 +42,11 @@ def flat_file(path, file, level=0):
         pragma_experimental = re.findall(
             r"(\/\/)|\s*(pragma?)\s*(experimental?)\s*(.*?)\s*;", l
         )
-        if len(pragma_experimental) == 1 and (pragma_experimental[0][1] == 'pragma') and (pragma_experimental[0][2] == 'experimental'):
+        if (
+            len(pragma_experimental) == 1
+            and (pragma_experimental[0][1] == "pragma")
+            and (pragma_experimental[0][2] == "experimental")
+        ):
             pragma_experimental = pragma_experimental[0]
             pragma_experimental = "|".join(pragma_experimental)
             if (pragma_experimental is not None) and (
