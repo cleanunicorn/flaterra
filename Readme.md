@@ -1,7 +1,7 @@
 # Flat Earth
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-<!-- CIRCLE CI -->
+[![CircleCI](https://circleci.com/gh/cleanunicorn/flaterra/tree/master.svg?style=shield)](https://circleci.com/gh/cleanunicorn/flaterra)
 <!-- [![Codacy Badge](https://api.codacy.com/project/badge/Grade/53bb3ba0ed50447698e775edd397baa7)](https://www.codacy.com/app/lucadanielcostin/karl) -->
 [![PyPI](https://img.shields.io/pypi/v/flaterra.svg)](https://pypi.org/project/flaterra/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
