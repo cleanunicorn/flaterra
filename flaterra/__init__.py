@@ -11,9 +11,7 @@ pragma_dict = {}
 
 def flat_file(path, file, main=False):
     # Normalize path
-    file = os.path.realpath(
-        "{path}/{file}".format(path=path, file=file)
-    )
+    file = os.path.realpath("{path}/{file}".format(path=path, file=file))
     path = os.path.dirname(file)
 
     logging.info("Reading file {file}".format(file=file))
@@ -32,11 +30,15 @@ def flat_file(path, file, main=False):
 
     for l in read_data:
         # Add experimental pragma flags
-        pragma_experimental = re.findall(r'(\\/\\/)|\\s*(pragma?)\\s*(experimental?)\\s*(.*?)\\s*;', l)
+        pragma_experimental = re.findall(
+            r"(\\/\\/)|\\s*(pragma?)\\s*(experimental?)\\s*(.*?)\\s*;", l
+        )
         if len(pragma_experimental) == 1:
             pragma_experimental = pragma_experimental[0]
-            pragma_experimental = '|'.join(pragma_experimental)
-            if (pragma_experimental is not None) and (pragma_dict.get(pragma_experimental) is None):
+            pragma_experimental = "|".join(pragma_experimental)
+            if (pragma_experimental is not None) and (
+                pragma_dict.get(pragma_experimental) is None
+            ):
                 pragma_dict[pragma_experimental] = True
                 logging.info("Adding pragma: {pragma}".format(pragma=l))
             else:
