@@ -69,7 +69,7 @@ def flat_file(path, file, level=0):
         )
         if len(import_match) == 2:
             imported_file = import_match[1]
-            flat_source += flat_file(path=path, file=imported_file, level=level+1)
+            flat_source += flat_file(path=path, file=imported_file, level=level + 1)
             flat_source += "\n"
 
             # Skip the import clause
