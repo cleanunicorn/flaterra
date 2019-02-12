@@ -6,6 +6,7 @@ import os
 
 # Save what files were already imported
 imported_files = {}
+pragma_dict = {}
 
 
 def flat_file(path, file, main=False):
@@ -26,9 +27,22 @@ def flat_file(path, file, main=False):
     # Match for pragma at level >0
     # ex: pragma solidity 0.5.0;
     # ex: pragma experimental ABIEncoderV2;
-    pragma_regex = r"\s*pragma\s*[solidity|experimental].*;"
+    global pragma_dict
+    pragma_regex = r"\s*pragma\s*experimental.*;"
 
     for l in read_data:
+        # Add experimental pragma flags
+        pragma_experimental = re.findall(r'(\\/\\/)|\\s*(pragma?)\\s*(experimental?)\\s*(.*?)\\s*;', l)
+        if len(pragma_experimental) == 1:
+            pragma_experimental = pragma_experimental[0]
+            pragma_experimental = '|'.join(pragma_experimental)
+            if (pragma_experimental is not None) and (pragma_dict.get(pragma_experimental) is None):
+                pragma_dict[pragma_experimental] = True
+                logging.info("Adding pragma: {pragma}".format(pragma=l))
+            else:
+                # This pragma was already added
+                continue
+
         # Skip other pragma definitions for included files
         if main is False:
             pragma_match = re.search(pragma_regex, l)
