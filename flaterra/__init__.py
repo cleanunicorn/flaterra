@@ -2,18 +2,25 @@ import re
 import argparse
 import logging
 import sys
+import os
 
 # Save what files were already imported
 imported_files = {}
 
 
 def flat_file(path, file, main=False):
-    logging.info("Reading file {path}/{file}".format(path=path, file=file))
+    # Normalize path
+    file = os.path.realpath(
+        "{path}/{file}".format(path=path, file=file)
+    )
+    path = os.path.dirname(file)
+
+    logging.info("Reading file {file}".format(file=file))
 
     flat_source = ""
     global imported_files
 
-    with open("{path}/{file}".format(path=path, file=file)) as f:
+    with open(file) as f:
         read_data = f.readlines()
 
     # Match for pragma at level >0
