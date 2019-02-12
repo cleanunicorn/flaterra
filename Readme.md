@@ -1,5 +1,9 @@
 # Flat Earth
 
+Inspired by "earth" in Portuguese, terra and the flatness of the Earth.
+
+Flaterra parses the provided Solidity source file and adds any other `imported` files. This is useful if you want to upload your source code to a block explorer for verification or to run analysis on it, for example with [MythX](https://mythx.io/) or [Mythril](https://github.com/ConsenSys/mythril-classic/).
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CircleCI](https://circleci.com/gh/cleanunicorn/flaterra/tree/master.svg?style=shield)](https://circleci.com/gh/cleanunicorn/flaterra)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/98178f0ea4ce44ecbb5dc7a918ba94f7)](https://www.codacy.com/app/lucadanielcostin/flaterra)
