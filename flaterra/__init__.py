@@ -9,15 +9,25 @@ imported_files = {}
 pragma_dict = {}
 
 
-def flat_file(path, file, main=False):
+def flat_file(path, file, level=0):
     # Normalize path
     file = os.path.realpath("{path}/{file}".format(path=path, file=file))
     path = os.path.dirname(file)
 
-    logging.info("Reading file {file}".format(file=file))
-
+    # Flattened source
     flat_source = ""
+
+    # Check if this file was already included
     global imported_files
+    if (file is not None) and (imported_files.get(file) is None):
+        imported_files[file] = True
+        logging.debug("Importing file {file}".format(file=file))
+    else:
+        logging.debug("Skipping file {file}".format(file=file))
+        return flat_source
+
+    logging.info(("+" * level) + " {file}".format(file=file))
+    logging.debug("Reading file {file}".format(file=file))
 
     with open(file) as f:
         read_data = f.readlines()
@@ -59,18 +69,10 @@ def flat_file(path, file, main=False):
         )
         if len(import_match) == 2:
             imported_file = import_match[1]
+            flat_source += flat_file(path=path, file=imported_file, level=level+1)
+            flat_source += "\n"
 
-            if (imported_file is not None) and (
-                imported_files.get(imported_file) is None
-            ):
-                imported_files[imported_file] = True
-                logging.debug("Importing file {file}".format(file=imported_file))
-                flat_source += flat_file(path=path, file=imported_file)
-                flat_source += "\n"
-            else:
-                logging.debug("Skipping file {file}".format(file=imported_file))
-
-            # Do not add the import clause
+            # Skip the import clause
             continue
 
         # Add line
@@ -104,11 +106,11 @@ def main():
     verbose = args.verbose
 
     # Set verbosity
-    logging.basicConfig(level=logging.INFO)
+    logging.getLogger().setLevel(logging.INFO)
     if verbose >= 1:
-        logging.basicConfig(level=logging.DEBUG)
+        logging.getLogger().setLevel(logging.DEBUG)
 
-    source = flat_file(path=contracts_dir, file=main_sol, main=True)
+    source = flat_file(path=contracts_dir, file=main_sol, level=0)
 
     if not output_sol:
         output_sol = main_sol.split(".")
