@@ -4,6 +4,7 @@ from flaterra.version import __version__
 import sys
 import os
 
+
 def read_file(fname):
     """
     return file contents
@@ -12,6 +13,7 @@ def read_file(fname):
     """
     with open(os.path.join(os.path.dirname(__file__), fname), "r") as fd:
         return fd.read()
+
 
 class VerifyVersionCommand(install):
     """Custom command to verify that the git tag matches our version"""
@@ -27,6 +29,7 @@ class VerifyVersionCommand(install):
             )
             sys.exit(info)
 
+
 setup(
     name="flaterra",
     version=__version__,
@@ -34,8 +37,9 @@ setup(
     author="Daniel Luca",
     author_email="daniel.luca@consensys.net",
     long_description=read_file("Readme.md") if os.path.isfile("Readme.md") else "",
-    packages=find_packages(exclude=["contrib", "docs", "tests"]),
     long_description_content_type="text/markdown",
+    packages=find_packages(exclude=["contrib", "docs", "tests"]),
+    install_requires=read_file("requirements.txt").split("\n"),
     entry_points={"console_scripts": ["flaterra=flaterra:main"]},
     cmdclass={"verify": VerifyVersionCommand},
 )
