@@ -59,17 +59,20 @@ def flat_file(path, file, main=False):
 def main():
     class CliParser(argparse.ArgumentParser):
         def error(self, message):
-            sys.stderr.write('Error: {}\n'.format(message))
+            sys.stderr.write("Error: {}\n".format(message))
             self.print_help()
             sys.exit(2)
 
     parser = CliParser()
-    parser.add_argument(
-        "--folder", help="Folder with contracts", default="./"
-    )
+    parser.add_argument("--folder", help="Folder with contracts", default="./")
     parser.add_argument("--contract", help="Main source Solidity file")
-    parser.add_argument("--output", help="Output flattened Solidity file. Otherwise it appends `_flat.sol` to the contract filename.")
-    parser.add_argument("--verbose", "-v", action="count", default=0, help="Show details")
+    parser.add_argument(
+        "--output",
+        help="Output flattened Solidity file. Otherwise it appends `_flat.sol` to the contract filename.",
+    )
+    parser.add_argument(
+        "--verbose", "-v", action="count", default=0, help="Show details"
+    )
     args = parser.parse_args()
 
     contracts_dir = args.folder

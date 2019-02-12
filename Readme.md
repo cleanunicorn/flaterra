@@ -1,8 +1,15 @@
 # Flat Earth
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+<!-- CIRCLE CI -->
+<!-- [![Codacy Badge](https://api.codacy.com/project/badge/Grade/53bb3ba0ed50447698e775edd397baa7)](https://www.codacy.com/app/lucadanielcostin/karl) -->
+[![PyPI](https://img.shields.io/pypi/v/flaterra.svg)](https://pypi.org/project/flaterra/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=cleanunicorn_flaterra&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=cleanunicorn_flaterra)
+
 A way to make Solidity source code flat like the earth.
 
-Imports referenced
+![Flat Earth](./static/flat-earth.png)
 
 ## Install
 
