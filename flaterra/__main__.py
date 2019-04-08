@@ -3,5 +3,5 @@
 import sys
 import flaterra
 
-if __name__=="__main__":
+if __name__ == "__main__":
     sys.exit(flaterra.main())
